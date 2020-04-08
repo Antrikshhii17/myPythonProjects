@@ -1,0 +1,5 @@
+Script to get the Python executable path :
+
+python -c "import sys; print(sys.executable)"
+__________________________________________________________________________
+

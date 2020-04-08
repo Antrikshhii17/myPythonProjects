@@ -1,0 +1,27 @@
+					PYTHON ERRORS
+
+COMMAND- df = pd.read_csv(filename)
+ERROR- UnicodeDecodeError: 'utf-8' codec can't decode byte 0xa0 in position 10: invalid start byte
+
+
+FIX- df = pd.read_csv(filename,encoding=”ISO-8859–1”)
+___________________________________________________________________________________________________
+
+CODE- When trying to call the variable.
+ERROR- TypeError: 'str' object is not callable
+
+FIX- use str() function on that variable.
+___________________________________________________________________________________________________
+
+					GIT ERRORS
+
+COMMAND- git remote rm origin
+ERROR- error: cannot lock ref 'refs/remotes/origin/feature/20181024_GDATAL-6577_NORGES_FX_XSL': unable to create directory for .git/refs/remotes/origin/feature/20181024_GDATAL-6577_NORGES_FX_XSL
+error: could not remove reference refs/remotes/origin/feature/20181024_GDATAL-6577_NORGES_FX_XSL
+
+
+FIX-    git reflog expire --expire-unreachable=now --all
+	git gc --prune=now
+___________________________________________________________________________________________________
+
+					
