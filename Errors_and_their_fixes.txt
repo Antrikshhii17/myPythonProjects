@@ -3,15 +3,18 @@
 COMMAND- df = pd.read_csv(filename)
 ERROR- UnicodeDecodeError: 'utf-8' codec can't decode byte 0xa0 in position 10: invalid start byte
 
-
 FIX- df = pd.read_csv(filename,encoding=”ISO-8859–1”)
-___________________________________________________________________________________________________
+
 
 CODE- When trying to call the variable.
 ERROR- TypeError: 'str' object is not callable
 
 FIX- use str() function on that variable.
-___________________________________________________________________________________________________
+
+
+OPERATION- To delete rows having age greater than 110.
+CODE- df.drop(df[df['AGE'] > 110].index, inplace = True)
+______________________________________________________________________________________
 
 					GIT ERRORS
 
@@ -22,6 +25,49 @@ error: could not remove reference refs/remotes/origin/feature/20181024_GDATAL-65
 
 FIX-    git reflog expire --expire-unreachable=now --all
 	git gc --prune=now
-___________________________________________________________________________________________________
+______________________________________________________________________________________
 
-					
+					MICROSOFT POWER QUERY
+
+Formula for extracting a substring after a specified character e.g- '_' :-
+
+Text.Upper(Text.Range([SourceId],Text.PositionOf([SourceId],"_")+1,3))
+
+Formula to get a conditional custom string from number of columns :-
+
+if Text.Contains([Family]," ") then Text.Combine({Text.Start([Family],1),Text.Start(Text.AfterDelimiter([Family]," "),1)})
+else Text.Start([Family],2)
+
+Formula to Concat first letters when multiple words else get first 3 letters :-
+
+if [Product.2] = null then Text.Upper(Text.Start([Product.1],3))
+else Text.Combine({Text.Start([Product.1],1),Text.Start([Product.2],1)})
+
+
+Character.FromNumber(Character.ToNumber(Text.Range(Text.Reverse([#"SymbolCode - Copy"]),1,1))+1)
+______________________________________________________________________________________
+					T-SQL / SQL SERVER
+
+Script to update duplicate records :-
+
+/*Here goes our CTE to partition the duplicates.
+'1' denotes unique value and all the values above 1 are duplicates*/
+WITH DelCTE AS 
+
+(
+Select SymbolID,SourceID,[Location],SymbolCode,ROW_NUMBER() OVER(PARTITION BY SymbolCode ORDER BY SymbolCode) AS Dup
+FROM Stage2
+)
+
+/*Use this part to see the newly build codes without updating the column*/
+Select *,-- from DelCTE ORDER BY SymbolCode
+  CASE Dup WHEN 2 THEN CASE WHEN LEFT(RIGHT(SymbolCode,2),1) = 'Z' THEN REPLACE(SymbolCode,LEFT(RIGHT(SymbolCode,2),1),CHAR(ASCII(SUBSTRING(REVERSE(SymbolCode),2,1))-1))
+							ELSE REPLACE(SymbolCode,LEFT(RIGHT(SymbolCode,2),1),CHAR(ASCII(SUBSTRING(REVERSE(SymbolCode),2,1))+1)) END
+	 ELSE SymbolCode
+	 END AS NewSymbol
+	 FROM DelCTE ORDER BY SymbolCode
+
+/*Our UPDATE statement to make the changes live*/
+--UPDATE DelCTE SET SymbolCode = CASE WHEN LEFT(RIGHT(SymbolCode,2),1) IN ('Z') THEN REPLACE(SymbolCode,LEFT(RIGHT(SymbolCode,3),1),CHAR(ASCII(SUBSTRING(REVERSE(SymbolCode),3,1))-1))
+--							   ELSE REPLACE(SymbolCode,LEFT(RIGHT(SymbolCode,3),1),CHAR(ASCII(SUBSTRING(REVERSE(SymbolCode),3,1))+1)) END
+--WHERE Dup = 2
