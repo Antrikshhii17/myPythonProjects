@@ -10,10 +10,6 @@ CODE- When trying to call the variable.
 ERROR- TypeError: 'str' object is not callable
 
 FIX- use str() function on that variable.
-
-
-OPERATION- To delete rows having age greater than 110.
-CODE- df.drop(df[df['AGE'] > 110].index, inplace = True)
 ______________________________________________________________________________________
 
 					GIT ERRORS

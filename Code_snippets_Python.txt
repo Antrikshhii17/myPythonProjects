@@ -56,3 +56,16 @@ if __name__ == '__main__':
         sleep(1)
 _________________________________________________________________________________________
 
+					DATA VISUALIZATION 
+
+OPERATION- To delete rows having age greater than 110.
+CODE- df.drop(df[df['AGE'] > 110].index, inplace = True)
+
+
+OPERATION- To plot histogram from dataframe having name and age columns
+CODE- df1 = df.plot.hist(rwidth=0.9)
+      df1.set_xlabel('Age')
+
+
+OPERATION- To plot Male, female count coming from single column
+CODE- df['gender'].value_counts().plot(kind='bar')
