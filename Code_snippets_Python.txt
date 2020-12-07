@@ -1,4 +1,6 @@
-'''Snippet for site login before scraping.'''
+					WEB SCRAPING
+
+'''Snippet for site login before scraping'''
 from bs4 import BeautifulSoup
 import requests
 

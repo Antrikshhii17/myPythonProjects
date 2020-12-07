@@ -3,3 +3,20 @@ Script to get the Python executable path :
 python -c "import sys; print(sys.executable)"
 __________________________________________________________________________
 
+Script to add virtual environment to Jupyter notebook :
+
+First run the following command in your virtual environment-
+pip install --user ipykernel
+
+Next you can add your virtual environment to Jupyter by typing-
+python -m ipykernel install --user --name=myenv
+
+This should print the following:
+Installed kernelspec myenv in /home/user/.local/share/jupyter/kernels/myenv
+___________________________________________________________________________
+
+Script to update conda :
+
+$ conda update -n base -c defaults conda
+___________________________________________________________________________
+
