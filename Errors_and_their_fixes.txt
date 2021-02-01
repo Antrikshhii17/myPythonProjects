@@ -70,3 +70,13 @@ Select *,-- from DelCTE ORDER BY SymbolCode
 --WHERE Dup = 2
 
 ______________________________________________________________________________________
+
+						PYSPARK ERRORS
+
+COMMAND- from pyspark.sql.functions import col, count
+ERROR- cannot find reference count in functions in pyspark
+
+FIX- pip install pyspark-stubs
+     If using conda, 'conda install -c conda-forge pyspark-stubs' will work
+______________________________________________________________________________________
+
