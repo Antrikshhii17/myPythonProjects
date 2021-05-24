@@ -40,6 +40,11 @@ Receipt_Location,Delivery_Location,Cycle,Start_Gas_Day,End_Gas_Day,Daily_Equival
 VALUES(?,?,?,?,?,?,?,?)"""
 
 
+# Getting each columns ready to be supplied and storing them in a variable 'params'
+# Converting dataframe to list of tuples
+params = list(tuple(row) for row in df1.values)
+
+
 # Writing data to database with try-catch block
 try:
     for row in df1.itertuples():    

@@ -71,3 +71,19 @@ CODE- df1 = df.plot.hist(rwidth=0.9)
 
 OPERATION- To plot Male, female count coming from single column
 CODE- df['gender'].value_counts().plot(kind='bar')
+_________________________________________________________________________________________
+
+					T-SQL
+/*
+Script to update the column where we need to join only capital letters from 
+another column
+*/
+
+
+/*UPDATE md SET*/ SELECT sourceID, symbol = CONCAT('GDAPD',RIGHT(product,1),LEFT(sourceID,1),SUBSTRING(sourceID,CHARINDEX(' ',sourceID,1)+1,1)
+  , SUBSTRING(sourceID,CHARINDEX(' ',sourceID,CHARINDEX(' ',sourceID)+1)+1,1))
+  FROM MetaData md
+  WHERE product LIKE 'GDAPT Day%'
+  --AND symbol IS NULL
+_________________________________________________________________________________________
+
