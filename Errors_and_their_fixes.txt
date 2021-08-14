@@ -80,3 +80,12 @@ FIX- pip install pyspark-stubs
      If using conda, 'conda install -c conda-forge pyspark-stubs' will work
 ______________________________________________________________________________________
 
+					DOCKER-COMPOSE
+
+- Environments must be in below format:
+	environment:
+      - KAFKA_ADVERTISED_HOST_NAME=kafka
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://broker:29092,PLAINTEXT_HOST://localhost:9092
+      - KAFKA_AUTO_CREATE_TOPICS_ENABLE=false
+
