@@ -26,7 +26,7 @@ dism.exe /Online /Disable-Feature:Microsoft-Hyper-V      (disable)
 dism.exe /Online /Enable-Feature:Microsoft-Hyper-V /All  (enable)
 ___________________________________________________________________________
 
-		LINUX COMMANDS (AIRFLOW)
+				LINUX COMMANDS :-
 
 List all the running processes :
 ps aux
@@ -38,13 +38,10 @@ Script to kill a process :
 kill -9 <PID>
 
 Script to edit a file :
-sudo nano <filename>
+nano <filename>
 
 Script to fetch new DAGs :
 python3 -c "from airflow.models import DagBag; d = DagBag();"
-___________________________________________________________________________
-
-				BASH COMMANDS :-
 
 Script to mount windows file system to linux :
 sudo nano /etc/wsl.conf
@@ -52,4 +49,5 @@ sudo nano /etc/wsl.conf
 	| root = /
 	| options = "metadata"
 # After adding above 3 lines to file, sign out of windows and sign in again. Done!
+
 
