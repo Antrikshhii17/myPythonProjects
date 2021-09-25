@@ -37,8 +37,9 @@ sudo lsof -i tcp:8080
 Script to kill a process :
 kill -9 <PID>
 
-Script to edit a file :
-nano <filename>
+Script to merge two csv files :
+paste -d , processed_data1.csv processed_data2.csv > processed.csv
+# -d stands for delimiter, here ',' for csv files
 
 Script to fetch new DAGs :
 python3 -c "from airflow.models import DagBag; d = DagBag();"
@@ -50,4 +51,65 @@ sudo nano /etc/wsl.conf
 	| options = "metadata"
 # After adding above 3 lines to file, sign out of windows and sign in again. Done!
 
+___________________________________________________________________________
+
+Script to add our IP to spark-env.sh file :
+export SPARK_LOCAL_IP="You-IP"
+#to set the IP address Spark binds to on this 
+node in $SPARK_HOME/conf/spark-env.sh
+
+***********Spark Master at spark://E007195-FEB19.emea.drillinginfo.com:7077**********
+___________________________________________________________________________
+
+				KAFKA
+
+Script to start Zookeeper server :
+bin/zookeeper-server-start.sh config/zookeeper.properties
+
+Script to start Kafka broker :
+bin/kafka-server-start.sh config/server.properties
+
+Script to create topic :
+bin/kafka-topics.sh --create --zookeeper localhost:2181 \
+--replication-factor 1 --partitions 1 --topic testTopic
+
+Script to list topics :
+bin/kafka-topics.sh --list --zookeeper localhost:2181
+
+Script to start producer :
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic testTopic
+
+Script to start consumer :
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic testTopic
+
+				KAFKA CONNECT (postgres)
+
+Script to start the connector :
+bin/connect-standalone.sh /config/postgres-standalone.properties /config/postgres-standalone-sink.properties
+
+
+___________________________________________________________________________
+
+				POSTGRESQL
+
+Script to start postgresql cluster :
+pg_ctlcluster 12 main start
+
+Script to switch to postgres system account :
+sudo su - postgres
+
+Script to enter postgresql database shell and switch to desired db :
+psql -U <user> <dbname>
+
+Script to start pgadmin webserver :
+sudo /usr/pgadmin4/bin/setup-web.sh
+
+	Then restart apache2 service by :
+	sudo service apache2 restart
+
+	Then get the ip address of ubuntu machine by :
+	ip a (listed after 'inet')
+
+	Then access the pgadmin4 webpage on :
+	http://<ip_address>/pgadmin4
 
