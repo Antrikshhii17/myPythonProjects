@@ -1,20 +1,22 @@
 # Coding test
 
 
-def maximumProduct(inputArray):
-    answer = 1
-    for i in inputArray:
-        answer = answer * i
-    return int(answer % 1000000007)
+def maximumProduct(inputarray):
+    max = inputarray[0]
+    for i in inputarray:
+        if i > max:
+            max = i
+    prod = 1
+    for j in inputarray:
+        prod *= j
+    return prod * max
 
 
 if __name__ == '__main__':
-    inputArray_count = int(input().strip())
-    inputArray = []
-
-    for _ in range(inputArray_count):
-        inputArray_item = int(input().strip())
-        inputArray.append(inputArray_item)
-
-    result = maximumProduct(inputArray)
+    inputarray_count = int(input().strip())
+    inputarray = []
+    for _ in range(inputarray_count):
+        inputarray_item = int(input().strip())
+        inputarray.append(inputarray_item)
+    result = maximumProduct(inputarray)
     print(result)

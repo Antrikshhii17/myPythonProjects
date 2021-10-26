@@ -14,4 +14,4 @@ def numbers_to_strings(arg1):
 if __name__ == "__main__":
     print('Select from 0,1,2: ')
     arg1 = int(input().strip())
-    print(numbers_to_strings(arg1))
+    print((numbers_to_strings(arg1)))
