@@ -1,4 +1,4 @@
-Script to get the Python executable path :
+0Script to get the Python executable path :
 
 python -c "import sys; print(sys.executable)"
 __________________________________________________________________________
@@ -70,11 +70,11 @@ Script to start Kafka broker :
 bin/kafka-server-start.sh config/server.properties
 
 Script to create topic :
-bin/kafka-topics.sh --create --zookeeper localhost:2181 \
---replication-factor 1 --partitions 1 --topic testTopic
+bin/kafka-topics.sh --bootstrap-server localhost:9092 \
+--replication-factor 1 --partitions 1 --topic testTopic --create
 
 Script to list topics :
-bin/kafka-topics.sh --list --zookeeper localhost:2181
+bin/kafka-topics.sh --list --bootstrap-server localhost:2181
 
 Script to start producer :
 bin/kafka-console-producer.sh --broker-list localhost:9092 --topic testTopic
@@ -93,7 +93,7 @@ ___________________________________________________________________________
 				POSTGRESQL
 
 Script to start postgresql cluster :
-pg_ctlcluster 12 main start
+sudo pg_ctlcluster 12 main start OR sudo service postgresql start
 
 Script to switch to postgres system account :
 sudo su - postgres
@@ -101,15 +101,25 @@ sudo su - postgres
 Script to enter postgresql database shell and switch to desired db :
 psql -U <user> <dbname>
 
-Script to start pgadmin webserver :
-sudo /usr/pgadmin4/bin/setup-web.sh
+Script to switch from postgres account to antrikshhii17 :
+sudo su antrikshhii17
 
-	Then restart apache2 service by :
-	sudo service apache2 restart
+Script to start pgadmin webserver :				List databases- \l
+sudo /usr/pgadmin4/bin/setup-web.sh				List tables in db- \d
 
-	Then get the ip address of ubuntu machine by :
-	ip a (listed after 'inet')
+	Then restart apache2 service by :			List all schemas- \dn
+	sudo service apache2 restart				List all functions- \df
 
-	Then access the pgadmin4 webpage on :
-	http://<ip_address>/pgadmin4
+	Then get the ip address of ubuntu machine by :		Describe table- \d <table>
+	ip a (listed after 'inet')				Switch to different db- \c <db>
 
+	Then access the pgadmin4 webpage on : 			List users- \du
+	http://<ip_address>/pgadmin4				
+
+Password for pgadmin4 Login page : 
+PW- pgadmin4
+
+Steps to reset password for postgres db :
+	Go to postgres=# by typing psql.
+	Then type \password
+	It will ask to set a new password. Retype and confirm.

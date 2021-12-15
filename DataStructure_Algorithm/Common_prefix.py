@@ -9,11 +9,10 @@ def commonprefix(strs):
 	for idx, i in enumerate(minx):
 		for j in strs:
 			if i != j[idx]:
-				return minx[:idx]
+				minx = minx[:idx]
 	return minx
 
-
-	# output = ''  # This is another algorithm taken from discussion section.
+	# output = ''  # This is another algorithm taken from discussion section in leetcoed.
 	# for v in zip(*strs):
 	# 	if (v[0],) * len(v) == v:
 	# 		output += v[0]
@@ -23,5 +22,5 @@ def commonprefix(strs):
 
 
 if __name__ == '__main__':
-	strs = ['total', 'totally', 't', 'tobacco']
+	strs = ['Harmesh', 'Harminder', 'Harmeet', 'Harman']
 	print(commonprefix(strs))

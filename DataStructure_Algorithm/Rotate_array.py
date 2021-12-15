@@ -9,7 +9,7 @@ def rotateKtimes(N, A, Dir, K):
 
 
 def rotateArray(N, A, Dir):  # Rotating the array one time
-	last, first = A[-1], A[0]
+	first, last = A[0], A[-1]
 	if Dir == 'C':
 		for i in range(N - 1, -1, -1):
 			A[i] = A[i - 1]

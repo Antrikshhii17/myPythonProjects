@@ -1,7 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="059bfec3-6159-4eed-95cc-462aa7a1684d" name="Default Changelist" comment="" />
+    <list default="true" id="059bfec3-6159-4eed-95cc-462aa7a1684d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Company_face.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Count_occurrences.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Count_segments_in_7-segment_display.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Find_first_and_last_position.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Get_duplicates.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Longest_valid_parentheses.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Remove_dups_from_singly_linkedlist.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Reverse_integer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Search_insert_position.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Smallest_notes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Valid_parenthesis.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/my_sorting_algo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/DataStructure_Algorithm.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DataStructure_Algorithm.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bubble_sort.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bubble_sort.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common_prefix.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common_prefix.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Remove_dups_from_sorted_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/Count_of_unique_elements_in_sorted_list.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reverse_words_in_string.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reverse_words_in_string.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rotate_array.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rotate_array.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/find_element.py" beforeDir="false" afterPath="$PROJECT_DIR$/find_element.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/my_algo.py" beforeDir="false" afterPath="$PROJECT_DIR$/my_algo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python_quick_tips.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Python_quick_tips.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,16 +42,21 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="1m9attxz9Vxf9EQVLFPO8yImSjZ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Python" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -33,8 +66,8 @@
       </console-settings>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Common_prefix">
-    <configuration name="Common_prefix" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.Longest_valid_parentheses">
+    <configuration name="Company_face" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="DataStructure_Algorithm" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -46,7 +79,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Common_prefix.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Company_face.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -55,7 +88,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Length_of_last_word" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Find_first_and_last_position" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="DataStructure_Algorithm" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -67,7 +100,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Length_of_last_word.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Find_first_and_last_position.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -76,7 +109,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Replace_character_in stringA_from_stringB (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Longest_valid_parentheses" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="DataStructure_Algorithm" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -88,7 +121,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Replace_character_in stringA_from_stringB.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Longest_valid_parentheses.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -97,7 +130,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Replace_character_in stringA_from_stringB" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Search_insert_position" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="DataStructure_Algorithm" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -109,7 +142,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\antriksh.chourasia\PycharmProjects\DataStructure_Algorithm\Replace_character_in stringA_from_stringB.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Search_insert_position.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -118,7 +151,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Rotate_array" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Valid_parenthesis" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="DataStructure_Algorithm" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -130,7 +163,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Rotate_array.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Valid_parenthesis.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -141,14 +174,15 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Common_prefix" />
-        <item itemvalue="Python.Replace_character_in stringA_from_stringB (1)" />
-        <item itemvalue="Python.Replace_character_in stringA_from_stringB" />
-        <item itemvalue="Python.Rotate_array" />
-        <item itemvalue="Python.Length_of_last_word" />
+        <item itemvalue="Python.Longest_valid_parentheses" />
+        <item itemvalue="Python.Valid_parenthesis" />
+        <item itemvalue="Python.Company_face" />
+        <item itemvalue="Python.Search_insert_position" />
+        <item itemvalue="Python.Find_first_and_last_position" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -162,42 +196,16 @@
     </task>
     <servers />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="94" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1631351970175">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="94" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1631351970175" />
-    <state x="420" y="94" key="FileChooserDialogImpl" timestamp="1632632478766">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="420" y="94" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1632632478766" />
-    <state width="1257" height="122" key="GridCell.Tab.0.bottom" timestamp="1635184848908">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1257" height="122" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1635184848908" />
-    <state width="1257" height="122" key="GridCell.Tab.0.center" timestamp="1635184848908">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1257" height="122" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1635184848908" />
-    <state width="1257" height="122" key="GridCell.Tab.0.left" timestamp="1635184848908">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1257" height="122" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1635184848908" />
-    <state width="1257" height="122" key="GridCell.Tab.0.right" timestamp="1635184848908">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1257" height="122" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1635184848908" />
-    <state x="141" y="0" key="SettingsEditor" timestamp="1634037699849">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="141" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1634037699849" />
-    <state x="335" y="163" key="com.intellij.ide.util.TipDialog" timestamp="1635227820205">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="335" y="163" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1635227820205" />
-    <state x="303" y="1" key="search.everywhere.popup" timestamp="1634037574366">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="303" y="1" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1634037574366" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

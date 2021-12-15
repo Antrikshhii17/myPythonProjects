@@ -11,6 +11,6 @@ def myalgo(list):
 
 
 if __name__ == '__main__':
-    list = [62, 59, 49, 30, 25, 20, 17]
+    list = [62, 59, 6, 49, 30, 25, 20, 17]
     result = myalgo(list)
     print(f'The smallest element is: %d at the index: %d' % result)

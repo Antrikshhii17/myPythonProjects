@@ -3,7 +3,7 @@
 
 
 def findelem(list, elem):
-    for i in range(0, len(list)):
+    for i in range(len(list)):
         if list[i] == elem:
             return i
     return -1

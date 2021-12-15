@@ -3,7 +3,7 @@
 
 def reverse(string):
     res = ''
-    for i in list(string.split('.')):
+    for i in string.split('.'):
         res = ''.join(i + '.' + res)
     return res[:-1]  # Eliminating the additional '.' in the end
 
