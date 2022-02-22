@@ -53,12 +53,24 @@ sudo nano /etc/wsl.conf
 
 ___________________________________________________________________________
 
+				PYSPARK 
+
 Script to add our IP to spark-env.sh file :
 export SPARK_LOCAL_IP="You-IP"
 #to set the IP address Spark binds to on this 
 node in $SPARK_HOME/conf/spark-env.sh
-
 ***********Spark Master at spark://E007195-FEB19.emea.drillinginfo.com:7077**********
+
+
+Script to run python file with pyspark in Ubuntu :
+pyspark <python file>
+
+Script to write dataframe to Avro:
+Launch pyspark with following package-
+pyspark --packages org.apache.spark:spark-avro_2.12:3.2.0
+>>>Df = spark.read.csv('file')
+>>>Df.write.format("avro").save('file.avro')
+
 ___________________________________________________________________________
 
 				KAFKA

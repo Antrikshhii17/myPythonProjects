@@ -5,30 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="059bfec3-6159-4eed-95cc-462aa7a1684d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Company_face.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Count_occurrences.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Count_segments_in_7-segment_display.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Find_first_and_last_position.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Get_duplicates.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Longest_valid_parentheses.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Remove_dups_from_singly_linkedlist.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Reverse_integer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Search_insert_position.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Smallest_notes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Valid_parenthesis.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/my_sorting_algo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/DataStructure_Algorithm.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DataStructure_Algorithm.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bubble_sort.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bubble_sort.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common_prefix.py" beforeDir="false" afterPath="$PROJECT_DIR$/Common_prefix.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Remove_dups_from_sorted_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/Count_of_unique_elements_in_sorted_list.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reverse_words_in_string.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reverse_words_in_string.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Rotate_array.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rotate_array.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/find_element.py" beforeDir="false" afterPath="$PROJECT_DIR$/find_element.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_algo.py" beforeDir="false" afterPath="$PROJECT_DIR$/my_algo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python_quick_tips.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Python_quick_tips.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

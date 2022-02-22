@@ -49,9 +49,7 @@ Script to update duplicate records :-
 
 /*Here goes our CTE to partition the duplicates.
 '1' denotes unique value and all the values above 1 are duplicates*/
-WITH DelCTE AS 
-
-(
+WITH DelCTE AS (
 Select SymbolID,SourceID,[Location],SymbolCode,ROW_NUMBER() OVER(PARTITION BY SymbolCode ORDER BY SymbolCode) AS Dup
 FROM Stage2
 )

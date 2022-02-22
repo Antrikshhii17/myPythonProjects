@@ -31,9 +31,7 @@ from gmail import GMail, Message
 
 
 def get_bitcoin_price():
-    """Get current Bitcoin price in USD using Coindesk's real-time API"""
     response = get('https://api.coindesk.com/v1/bpi/currentprice.json').json()
-
     return response['bpi']['USD']['rate']
 
 
