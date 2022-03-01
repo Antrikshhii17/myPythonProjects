@@ -1,6 +1,6 @@
 from pyspark.sql import SparkSession
 from pyspark import SparkContext, SparkConf
-from pyspark.sql.types import *
+from pyspark.sql.types import StructType, IntegerType, StringType, StructField
 from pyspark.sql import functions as F
 import re
 
