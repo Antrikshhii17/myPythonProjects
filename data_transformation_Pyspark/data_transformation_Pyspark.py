@@ -1,7 +1,7 @@
 # Importing our libraries
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as fn
-from pyspark.sql.types import *
+
 # Creating SparkSession
 ss = SparkSession.builder.appName('loadCSV').getOrCreate()
 
