@@ -85,3 +85,139 @@ another column
   --AND symbol IS NULL
 _________________________________________________________________________________________
 
+					PANDAS
+
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_rows', None)
+pd.set_option('display.expand_frame_repr', False)
+pd.set_option('max_colwidth', None)
+
+_________________________________________________________________________________________
+
+					PYTHON
+# Read a specific file from a directory
+
+directory = os.getcwd()+'<folder>'
+specific_file = '<filename>'
+print(directory)
+
+dict_read = {}
+if len(specific_file.split(",")) < 2:
+    for file in os.listdir(directory):
+        if file.endswith('.csv') and file.lower().startswith(specific_file):
+            file_to_read = file
+            print(file_to_read)
+
+_________________________________________________________________________________________
+
+					JSON
+
+# Read data from nested URLs
+
+import urllib.request
+import json
+
+base_url = '<url>'
+
+def getdrugurl(base_url):
+    # Getting only drug URL(s) from the base URL
+    with urllib.request.urlopen(base_url) as reader:
+        jsontext = reader.read().decode('utf-8')
+        json_url_obj = json.loads(jsontext)
+        drug_url = [*json_url_obj['formulary_urls']]
+    return drug_url
+
+each_url = getdrugurl(base_url)
+each_url
+
+def getproviderjson(drug_url):
+    # Reading the JSON file from the URL
+    with urllib.request.urlopen(drug_url) as reader:
+        jsontext = reader.read().decode('utf-8')
+        jsontext = jsontext.replace('false', '"False"').replace('true', '"True"')
+        json_data = json.loads(jsontext)
+    return json_data
+
+json_data = getproviderjson(each_url)
+
+json_data.toPandas().head(5)
+
+_________________________________________________________________________________________
+
+					HIVE
+# Extract only numbers from a column
+
+REGEXP_EXTRACT(<column_name>,'[0-9]+', 0)
+
+_________________________________________________________________________________________
+
+					DYNAMIC SQL IN PYTHON
+
+# Build a dynamic select statement when columns are not known
+
+# input.ini file content
+--x--
+[common]
+
+dbname: <dbname>
+tablename: <tablename>
+
+count: 50
+startdate : yyyy-mm-dd
+enddate : yyyy-mm-dd
+
+# Ensure you put NULL for every column that has no equivalent from source
+[staging]
+
+key1 : NULL
+key2 : NULL
+key3 : NULL
+key4 : NULL
+key5 : NULL
+--x--
+
+
+# To load the input.ini file into run_config dict
+import configparser
+run_config = {}
+config = configparser.ConfigParser()
+config.read('./input.ini')
+
+for section in config.sections():
+    for option in config.options(section):
+        run_config[section+'.'+option] = config.get(section, option)
+
+
+def dynamic_select_statement(spark, run_config):
+    select_fields = ""
+    
+    for key, value in run_config.items():
+        if 'staging' in key.lower():
+            select_fields = select_fields + value + ", "
+    
+    select_sql = "Select " + select_fields + " from " + run_config['common.dbname'] + "." + run_config['common.tablename']
+    select_sql = select_sql.replace(',  from',' from').replace(", )",")")
+    
+    print(select_sql)
+    df = spark.sql(select_sql)
+    df.write.insertInto(run_config['common.dbname'] + "." + <new_tablename>, overwrite = True)
+    return None
+
+
+# Use of stack for pivot
+
+import pandas as pd
+
+hhi_data = spark.sql("""SELECT * FROM <dbname>.<>tablename""")
+l = []
+unwanted_cols = ['<col1>','<col2>','<col3>']
+seperator = ','
+unpivot_columns = hhi_data.columns
+unpivot_columns = [ele for ele in unpivot_columns if ele not in unwanted_cols]
+unpivot_columns_helper=seperator.join(unpivot_columns).split(",")
+for a in range(len(unpivot_columns)):
+     l.append("'{}'".format(unpivot_columns[a]) + ",`" +unpivot_columns_helper[a]+"`")
+
+unpivotExpr = "stack("+str(len(unpivot_columns))+","+ seperator.join(l)+") as (year,HHI)"
+hhi_data_pivot = hhi_data.select("<column>", f.expr(unpivotExpr))
+
