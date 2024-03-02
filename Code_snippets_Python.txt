@@ -221,3 +221,244 @@ for a in range(len(unpivot_columns)):
 unpivotExpr = "stack("+str(len(unpivot_columns))+","+ seperator.join(l)+") as (year,HHI)"
 hhi_data_pivot = hhi_data.select("<column>", f.expr(unpivotExpr))
 
+-------------------x---------------------------x-------------------------
+
+# Snippet for gettign columns list from JSON metadata
+with open('<json file>') as metadata:
+    schema = json.load(metadata)
+# Getting the column list from JSON metadata
+cols, table = [], ''
+for item in schema['extracts']:
+    if file_to_read in item['fileName']:
+        table = item['headerInfo']['tableName']
+        for i in item['columnInfo']:
+            cols.append(i)
+metadata_cols = list(map(lambda x: x['columnName'], cols))
+
+----------------x-----------------x----------------------x---------------
+
+# Using regex to match year in column headers dynamically
+if file_to_read == '<csv file>':
+	curr_year, next_year = [], []
+	countr = 0
+	for item in metadata_cols:
+		if any(char.isdigit() for char in item) and countr < 5:
+			item = re.sub("\d+", str(int(year) - 1), item)
+			curr_year.append(item)
+			countr += 1
+		elif any(char.isdigit() for char in item):
+			item = re.sub("\d+", year, item)
+			next_year.append(item)
+
+---------------x-------------------------x------------------------x---------
+
+# Separating static columns to merge with dynamic columns (cols containing year that changes in each file)
+static_items = [item for item in metadata_cols if not any(char.isdigit() for char in item)]
+
+---------------------x----------------------x--------------------------
+
+# Function to unzip file recursively
+def unzip_all(directory):
+    # Performing unzip in recursion
+    for item in os.listdir(directory):
+        abs_path = os.path.join(directory, item)
+        if item.endswith('.zip'):
+            file_name = os.path.abspath(abs_path)
+            zip_ref = zipfile.ZipFile(file_name, compression=zipfile.ZIP_DEFLATED)
+            zip_ref.extractall(directory)
+            zip_ref.close()
+            os.remove(file_name)
+        elif os.path.isdir(abs_path):
+            unzip_all(abs_path)
+    return None
+
+-----------------x------------------------x-------------------------
+
+# Scraper function
+def get_data(url, year, directory):
+    # Scraping the webpage using GET method of requests module
+    page = requests.get(url)
+
+    # Using bs4 to clean up the page
+    soup = BeautifulSoup(page.content)
+    soup.prettify()
+
+    # Filtering the links ending with .zip
+    zip_list = []
+    for anchor in soup.findAll('a', href=True):
+        links = anchor['href']
+        if links.endswith('.zip') and year in links:
+            zip_list.append(links)
+
+    # Executing the wget to initiate the download
+    for i in zip_list:
+        zfile = i.split('/')[-1]
+        urllib.request.urlretrieve(i, os.path.join(directory, zfile))
+    return None
+
+-------------------x---------------------------x-------------------------
+
+# Perform column operation dynamically on a spark dataframe
+
+df2 = df.select(*[f.col(c).alias(str(c).replace("yr_","")) for c in df.columns ])
+df2 = df.select(*[f.col(c).alias(str(c).replace(' ','_')) if(' ') in str(c) else f.col(c) for c in df.columns])
+
+lag_window = Window.partitionBy('<colname>').orderBy('<col2>')
+df2 = df.select("*",*[f.lag(f.col(str(col)),1).over(lag_window).alias(str(col)+"_lagvalue") for col in df])
+
+-------------------x---------------------------x-------------------------
+
+# Count of flags with condition
+report1 = report1_mid.groupBy('col1','col2').agg(f.countDistinct('col3').alias('dist_count_col3'),
+                                               f.count(f.when(f.col('col4')==1,f.col('col4'))).alias('total_cnt_col4'),
+                                               f.count(f.when(f.col('col5')==1,f.col('col5'))).alias('total_cnt_col5'),
+                                               f.count(f.when(f.col('col6')==1,f.col('col6'))).alias('total_cnt_col6'))
+
+-------------------x---------------------------x-------------------------
+
+from boto3.session import Session
+ACCESS_KEY='your_access_key'
+SECRET_KEY='your_secret_key'
+
+session = Session(aws_access_key_id=ACCESS_KEY,
+                  aws_secret_access_key=SECRET_KEY)
+s3 = session.resource('s3')
+your_bucket = s3.Bucket('your_bucket')
+
+for s3_file in your_bucket.objects.all():
+    print(s3_file.key)
+
+import boto3
+s3 = boto3.resource('s3')
+my_bucket = s3.Bucket("s3a://123456-abcd-gef")
+for my_bucket_object in my_bucket.objects.all():
+    print(my_bucket_object)
+
+-------------------x---------------------------x-------------------------
+
+# Read the config file
+run_config = {}
+config = configparser.ConfigParser()
+config.read('teds_config_bcbsm_nebula.ini')
+
+for section in config.sections():
+    for option in config.options(section):
+        run_config[section+'.'+option] = config.get(section, option)
+
+-------------------x---------------------------x-------------------------
+
+# Remove duplicates
+df .groupby(['column1', 'column2']) \
+.count() \
+.where('count > 1') \
+.sort('count', ascending=False).show()
+
+-------------------x---------------------------x-------------------------
+ 
+# Writing to Unity Catalog
+catalog = "catalog_name"
+schema = "schema_name"
+table_name = "table_name"
+df.write.format("delta").option("overwriteSchema", "true").mode("overwrite").saveAsTable(f"{catalog}.{schema}.{table_name}")
+
+-------------------x---------------------------x-------------------------
+
+# Rename columns of dataframe in single step
+from functools import reduce
+new_columns = ['col1', 'col2', 'col3', 'col4']
+df_renamed = reduce(lambda df, x: df.withColumnRenamed(old_columns[x], new_columns[x]), range(len(new_columns)), df)
+
+-------------------x---------------------------x-------------------------
+
+# Reading data directly to spark dataframe
+df = spark.read.format('csv').options(header='true', inferSchema='true', nanValue='').load('/Volumes/<volume_path>/<sample_data>.csv')
+
+-------------------x---------------------------x-------------------------
+
+# To wrap multiple elements of list in quotes where number of elements are not known
+col2 = ("'" + "','".join(col3.split(",")) + "'")
+
+-------------------x---------------------------x-------------------------
+
+# Method to change date format from yyyymmdd to yyyy-mm-dd without string manipulation
+from datetime import datetime
+datesample = '20221031'
+newdate = datetime.strptime(datesample, '%Y%m%d').date()
+datenew = newdate.strftime('%Y-%m-%d')
+datenew
+
+-------------------x---------------------------x-------------------------
+
+# When error says- location of the table already exists
+df.write\
+.option("path", "<table_path>")\
+.mode("overwrite")\
+.saveAsTable("dbname.tablename")
+
+-------------------x---------------------------x-------------------------
+
+# SUM the cols dynamically
+cols = [df1.columns[-2], df1.columns[-1]]
+df2 = df1.withColumn('newcol', f.expr('-'.join(cols)))
+
+-------------------x---------------------------x-------------------------
+
+# Pandas expand rows and columns
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_rows', None)
+pd.set_option('display.expand_frame_repr', False)
+pd.set_option('max_colwidth', None)
+
+-------------------x---------------------------x-------------------------
+
+# Unpack elements from list of lists
+data = list of lists
+flat_list = [item for sublist in data for item in sublist]
+
+-------------------x---------------------------x-------------------------
+
+# Coalesce function in python
+# def coalesce(*values):
+#     """Return the first non-None value or None if all values are None"""
+#     return next((v for v in values if v is not None), None)
+
+-------------------x---------------------------x-------------------------
+
+# Deduplication query in a nutshell
+# test_query = spark.sql("select a.* from (select * from schema.table1 where <column> not in \
+# (select distinct <column> from schema.table2 ) ) a where col2 = '<some_string>'")
+
+-------------------x---------------------------x-------------------------
+
+# Read excel fast in pandas
+from xlsx2csv import Xlsx2csv
+from io import StringIO
+import pandas as pd
+
+-------------------x---------------------------x-------------------------
+
+# Function to read excel using read_csv
+def read_excel(path: str, sheet_name: str) -> pd.DataFrame:
+    buffer = StringIO()
+    Xlsx2csv(path, outputencoding="utf-8", sheet_name=sheet_name).convert(buffer)
+    buffer.seek(0)
+    df = pd.read_csv(buffer)
+    return df
+
+-------------------x---------------------------x-------------------------
+
+# Fix df.collect() output
+coltest3 = spark.sql("show columns in schema.table").collect()
+coltest2 = [row.col_name for row in coltest3 if '<specific_col>' not in row]
+coltest = ', '.join(coltest2)
+coltest
+
+-------------------x---------------------------x-------------------------
+
+# Make first list element as column header before converting to pddf
+class_dict = {k[0]: list(k) for i, k in enumerate(class_list)}
+class_df = pd.DataFrame.from_dict(class_dict, orient='index').transpose()
+
+-------------------x---------------------------x-------------------------
+
+
