@@ -1,0 +1,102 @@
+import time
+import pandas as pd
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.select import Select
+
+# Expand pandas rows and columns to max width
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_rows', None)
+pd.set_option('display.expand_frame_repr', False)
+pd.set_option('max_colwidth', None)
+
+# Giving chromedriver location to the selenium webdriver
+s = Service(r"C:\Program Files (x86)\Chromium\chromedriver-win64\chromedriver.exe")
+driver = webdriver.Chrome(service=s)
+driver.maximize_window()
+
+# Defining the URL to scrape
+url = "sample_url"
+driver.get(url)
+time.sleep(2)
+
+# Supplying the value to first dropdown
+dropdown1 = driver.find_element(by=By.ID, value='ID_number')
+
+select_first_item = Select(dropdown1)
+select_first_item.select_by_index(17)
+time.sleep(8)
+
+# Second drop down
+dropdown2 = driver.find_element(by=By.ID, value='some_tag')
+
+select_second_item = Select(dropdown2)
+select_second_item.select_by_index(13)
+time.sleep(10)
+
+
+def build_cols():
+    # Getting the company_name
+    company_name_class = driver.find_elements(by=By.CLASS_NAME, value='sample')
+    company_name = []
+    for i in company_name_class:
+        company_name.append(i.text)
+
+    # Getting dept_name column
+    dept_class = driver.find_elements(by=By.CLASS_NAME, value='some_pointer')
+    dept_name = []
+    for i in dept_class:
+        dept_name.append(i.text)
+
+    # Getting address column
+    # addresslist = driver.find_element(by=By.CLASS_NAME, value='list_sample')
+    listitems = driver.find_elements(by=By.TAG_NAME, value='p')
+    address = []
+    for p in listitems:
+        address.append(p.text)
+    filtered_address = list(filter(None, address[2:-7]))
+    address_final = filtered_address[::2]
+    state_city = filtered_address[1::2]
+    address.clear()
+    return company_name, dept_name, address_final, state_city
+
+
+# Scraping the first page data
+company_name, dept_name, address, state_and_city = build_cols()
+
+# Iterator
+itr = 0
+while itr < 3:
+    time.sleep(5)
+
+    # Click on next button
+    next_button = driver.find_element(by=By.XPATH, value='//*[@id="some_id"]/div[3]/div[2]')
+    driver.execute_script("arguments[0].click();", next_button)
+
+    # Calling the above func
+    companyname, deptname, address_final, state_city = build_cols()
+
+    # Appending all next pages data to same list
+    for cn in companyname:
+        company_name.append(cn)
+    for dpt in deptname:
+        dept_name.append(dpt)
+    for adf in address_final:
+        address.append(adf)
+    for sc in state_city:
+        state_and_city.append(sc)
+    itr += 1
+
+phdata = {"col1": company_name, "col2": dept_name, "col3": address,
+          "col4": state_and_city}
+
+# Creating pandas dataframe from the dictionary
+df_pd = pd.DataFrame.from_dict(phdata, orient='index')
+df_pd = df_pd.transpose()
+# print(df_pd)
+
+# Writing the pandas dataframe to csv file
+df_pd.to_csv('<csv_file_name>.csv', index=False)
+driver.quit()
+
