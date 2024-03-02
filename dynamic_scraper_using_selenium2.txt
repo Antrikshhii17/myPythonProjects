@@ -1,0 +1,202 @@
+import time
+import pandas as pd
+import itertools
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+# from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.select import Select
+from selenium.webdriver.chrome.service import Service
+# from selenium.common.exceptions import TimeoutException
+# from selenium.webdriver.support.ui import WebDriverWait
+# from selenium.webdriver.common.action_chains import ActionChains
+# from selenium.webdriver.support import expected_conditions as EC
+
+# Expand pandas rows and columns to max width
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_rows', None)
+pd.set_option('display.expand_frame_repr', False)
+pd.set_option('max_colwidth', None)
+
+# Giving chromedriver location to the selenium webdriver
+s = Service(r"C:\Program Files (x86)\Chromium\chromedriver.exe")
+driver = webdriver.Chrome(service=s)
+driver.maximize_window()
+
+# Defining the URL to scrape
+url = "sample_url"
+driver.get(url)
+time.sleep(3)
+# Scroll down to view the dropdown
+driver.execute_script("window.scrollTo(0, 700)")
+time.sleep(3)
+
+# Switching to the iframe where content is present
+# frame = driver.find_element(by=By.XPATH,
+#         value='//*[@id="<some_post>"]/div/div/div/div/div/div/div/div/div[3]/div/div/iframe')
+# driver.switch_to.frame(frame)
+#
+# time.sleep(5)
+# # Supplying the value to the dropdown
+# dropdown1 = Select(driver.find_element(by=By.ID, value='<tag>'))
+#
+# # select_first_item = Select(dropdown1)
+# dropdown1.select_by_index(31)
+#
+# # Clicking on the Submit button
+# driver.find_element(by=By.XPATH, value="//button[@class='<button>']").click()
+# time.sleep(17)
+
+
+def dedup(listarg):
+    """Function for eliminating duplicates while preserving the element order"""
+    seen = set()
+    return [x for x in listarg if x not in seen and not seen.add(x)]
+
+
+def newtab_data():
+    """Function to extract info for each pharmacy"""
+    # Extracting organization info
+    orglist = []
+    organization = driver.find_element(By.XPATH, '//div[@class="<example>"]').text
+
+    org_address = driver.find_element(By.XPATH, '//address-display[@class="<example>"]').text.replace('\n', ', ')
+    orglist.append(organization)
+    orglist.append(org_address)
+    orglist = [', '.join(orglist)]
+
+    # Extracting the accredited sites info
+    accrsites_init = []
+    accrsites_list = driver.find_elements(By.XPATH, '//div[@class="<example>"]')
+    for i in accrsites_list:
+        accrsites_init.append(i.text)
+
+    accrsites = []
+    for i in accrsites_init:
+        accrsites.append(i.replace('\n', ' '))
+
+    # Extracting the accreditation information
+    width_33 = driver.find_elements(By.XPATH, '//div[@class="width-33"]')
+    pick_accrinfo = '[2]' if len(width_33) < 3 else '[3]'
+    accrinfo = []
+    try:
+        accrinfos = driver.find_element(By.XPATH, '(//div[@class="width-33"]){}'.format(pick_accrinfo))
+        spans = accrinfos.find_elements(By.TAG_NAME, 'span')
+        for i in spans:
+            accrinfo.append(i.text)
+        accrinfo = [' '.join(accrinfo)]
+    except: pass
+
+    return orglist, accrsites, accrinfo
+
+
+# ----------------------x------------------------
+# links = []
+# for i in driver.find_elements(By.XPATH, '//a[@class="<button>"]'):
+#     links.append(i.get_attribute('href'))
+# ----------------------x------------------------
+
+# # Selecting the pharmacies in iteration
+org_unique, accr_sites, accr_info = [], [], []
+# ----------------------x------------------------
+# cntr = 0
+# while cntr < 15:
+#     # print('Loop {} starts'.format(cntr))
+#     driver.get(links[cntr])
+#     time.sleep(3)
+#
+#     # New window opens here
+#     orglist, accrsites, accrinfo = newtab_data()
+#
+#     # Appending all the info to their respective lists
+#     for sites in accrsites:
+#         accr_sites.append(sites)
+#     for org in orglist:
+#         org_unique.append(org)
+#     for info in accrinfo:
+#         accr_info.append(info)
+#
+#     accr_sites_zero = 'NA' if len(accrsites) == 0 else accrsites[0]
+#     accr_info_zero = 'NA' if len(accrinfo) == 0 else accrinfo[0]
+#
+#     # print('Length of accrinfo is: {}'.format(len(accrinfo)))
+#
+#     accr_sites += list(itertools.repeat(accr_sites_zero, (len(org_unique) - len(accr_sites))))
+#     org_unique += list(itertools.repeat(orglist[0], (len(accr_sites) - len(org_unique))))
+#     accr_info += list(itertools.repeat(accr_info_zero, (len(accr_sites) - len(accr_info))))
+#     # accr_sites += accrsites[0] * (len(org_unique) - len(accr_sites))
+#     # org_unique += orglist[0] * (len(accr_sites) - len(org_unique))
+#     # accr_info += accrinfo[0] * (len(accr_sites) - len(accr_info))
+#     # driver.switch_to.window(driver.window_handles[1])
+#     driver.back()
+#     # print('Loop {} ends'.format(cntr))
+#     cntr += 1
+# -------------------------------x---------------------
+page = 28
+while page < 32:
+    # Switching to the iframe where content is present
+    frame = driver.find_element(by=By.XPATH,
+    value='//*[@id="fl-post-1308"]/div/div/div/div/div/div/div/div/div[3]/div/div/iframe')
+    driver.switch_to.frame(frame)
+    time.sleep(3)
+    # Supplying the value to the dropdown
+    dropdown1 = Select(driver.find_element(by=By.ID, value='<some_program>'))
+
+    # select_first_item = Select(dropdown1)
+    dropdown1.select_by_value('<some_value_from_drop_down>')
+
+    # Clicking on the Submit button
+    driver.find_element(by=By.XPATH, value="//button[@class='<example>']").click()
+    time.sleep(15)
+    print('Starting next page click')
+    # Next page
+    for i in range(0, page+1):
+        driver.find_element(By.XPATH, '//i[@class="icon-keyboard_arrow_right"]').click()
+    # time.sleep(2)
+
+    links2 = []
+    for i in driver.find_elements(By.XPATH, '//a[@class="au-target"]'):
+        links2.append(i.get_attribute('href'))
+
+    # Iterator again
+    cntr2 = 0
+    while cntr2 < 15:
+        # print('Loop {} starts'.format(cntr2))
+        # Scroll down a little
+        driver.get(links2[cntr2])
+        time.sleep(3)
+
+        # New window opens here
+        orglist, accrsites, accrinfo = newtab_data()
+
+        # Appending all the info to their respective lists
+        for sites in accrsites:
+            accr_sites.append(sites)
+        for org in orglist:
+            org_unique.append(org)
+        for info in accrinfo:
+            accr_info.append(info)
+
+        accr_sites_zero = 'NA' if len(accrsites) == 0 else accrsites[0]
+        accr_info_zero = 'NA' if len(accrinfo) == 0 else accrinfo[0]
+
+        accr_sites += list(itertools.repeat(accr_sites_zero, (len(org_unique) - len(accr_sites))))
+        org_unique += list(itertools.repeat(orglist[0], (len(accr_sites) - len(org_unique))))
+        accr_info += list(itertools.repeat(accr_info_zero, (len(accr_sites) - len(accr_info))))
+
+        driver.back()
+        # print('Loop {} ends'.format(cntr2))
+        cntr2 += 1
+    page += 1
+
+# Adding lists to create a dictionary
+phdata = {"ORGANIZATION": org_unique, "ACCREDITED_SITES": accr_sites,
+          "ACCREDITATION_INFORMATION": accr_info}
+
+# Creating pandas dataframe from the dictionary
+df_pd = pd.DataFrame.from_dict(phdata, orient='index').transpose()
+# print(df_pd)
+
+df_pd.to_csv('output_file.csv', index=False)
+driver.quit()
+
+
