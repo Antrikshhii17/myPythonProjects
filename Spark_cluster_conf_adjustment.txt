@@ -1,0 +1,79 @@
+SPARK CLUSTER CONF :-
+
+# Start the pyspark shell using below command, adjust the params as per your need
+pyspark --master yarn --driver-memory 5g --executor-memory 5g --num-executors 100 --executor-cores 5
+
+pyspark --master yarn --driver-memory 5g --executor-memory 5g --num-executors 40 --executor-cores 5 --conf spark.rpc.message.maxSize=1024 --conf spark.executor.memoryOverhead=4096
+
+
+# Refer to this webpage for resource calculation:
+https://www.c2fo.io/c2fo/spark/aws/emr/2016/07/06/apache-spark-config-cheatsheet/
+
+# Example spark-submit command with parallelism:
+./bin/spark-submit \
+  --[your class] \
+  --master yarn \
+  --deploy-mode cluster \
+  --num-executors 17 \
+  --conf spark.yarn.executor.memoryOverhead=4096 \
+  --executor-memory 35G \
+  --conf spark.yarn.driver.memoryOverhead=4096 \
+  --driver-memory 35G \
+  --executor-cores 5 \
+  --driver-cores 5 \
+  --conf spark.default.parallelism=170 \
+  /path/to/examples.jar
+
+# Example working spark-submit command in jupyterhub terminal:
+spark-submit --master yarn \
+	--deploy-mode "client" \
+	--num-executors 100 \
+	--executor-cores 5 \
+	--executor-memory 3g \
+	--driver-memory 5g \
+	--conf spark.hadoop.orc.overwrite.output.file=true \
+	--conf spark.network.timeout=6000s \
+	--conf spark.executor.memoryOverhead=16g \
+	--conf spark.driver.memoryOverhead=2g \
+	path_for_file/python_file.py
+
+
+# To get the spark configurations of the active cluster:
+sc.getConf().getAll()
+
+# To change the cluster config from jupyterhub:
+from pyspark.conf import SparkConf
+from pyspark.context import SparkContext
+from pyspark.sql.session import SparkSession
+configr = SparkConf().setAll([('spark.executor.memory', '5g'), ('spark.executor.cores', '5'), ('spark.num.executors','50'), ('spark.driver.memory','5g'), ('spark.driver.memoryOverhead','4g'), ('spark.executor.memoryOverhead','16g')])
+sc.stop()
+
+spark = SparkSession.builder.appName('Rx_Provider_Specialty').config(conf=configr).getOrCreate()
+sc = spark.sparkContext
+
+# For a 10 node cluster,
+Total cores = 15 x 10 = 150
+optimal number of cores per executor = 5
+num-executors = total cores / cores per executor = 150/5 = 30
+Take out 1 executor for application manager. 
+Hence, num-executors = 29
+And number of executor per node = 30/10 = 3
+
+
+# Custom configuration
+1. Get current congif
+	from pyspark.conf import SparkConf
+	from pyspark.sql import SparkSession
+	spark.sparkContext._conf.getAll()
+
+2. Set desired config to a conf variable
+	conf = spark.sparkContext._conf.setAll([('spark.executor.memory', '5g'), ('spark.executor.cores', '10'), ('spark.cores.max', '10'), ('spark.driver.memory','5g'), ('spark.executor.instances','10'), ('spark.executor.memoryOverhead', '6g'), ('spark.driver.memoryOverhead', '6g')])
+
+3. Stop current spark session
+	spark.sparkContext.stop()
+
+4. Start new spark session with custom conf
+	spark = SparkSession.builder.config(conf=conf).getOrCreate()
+
+
+
