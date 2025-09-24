@@ -4,6 +4,13 @@
 
 def count_occurrences(ourlist):
     # return dict((i, ourlist.count(i)) for i in ourlist)           # List comprehension approach
+
+    # Dict assignment approach
+    # dicx = {}
+    # unique_list = set(ourlist)
+    # for x in unique_list:
+    #     dict[x] = ourlist.count(x)
+    
     dicx = {}
     for j in ourlist:
         dicx.__setitem__(j, ourlist.count(j))
