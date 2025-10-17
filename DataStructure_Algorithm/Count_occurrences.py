@@ -9,7 +9,7 @@ def count_occurrences(ourlist):
     # dicx = {}
     # unique_list = set(ourlist)
     # for x in unique_list:
-    #     dict[x] = ourlist.count(x)
+    #     dicx[x] = ourlist.count(x)
     
     dicx = {}
     for j in ourlist:
